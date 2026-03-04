@@ -1,0 +1,59 @@
+<title>Spinny Wheel</title>
+<link rel="stylesheet" href="./styles/spinny-wheel.css" />
+<script defer src="./src/main.js" type="module"></script>
+
+<noscript>You need to enable Javascript to run this app.</noscript>
+
+<details id="history" aria-labelledby="history-summary" aria-describedby="history-help">
+  <summary id="history-summary">History</summary>
+  <button id="history-clear" type="button" aria-label="Clear history">Clear</button>
+  <p id="history-help" class="sr-only">Contains recent spin results and removals.</p>
+  <ul id="history-list" role="log" aria-live="polite" aria-relevant="additions"></ul>
+</details>
+
+<figure id="wheel-container">
+  <figcaption id="result">
+    <p id="result-label">Result</p>
+    <output id="display" aria-live="polite" aria-atomic="true" aria-labelledby="result-label" role="status"></output>
+  </figcaption>
+
+  <p id="options-label" class="sr-only">Wheel items</p>
+  <div id="wheel" role="group">
+    <svg aria-hidden="true" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="50" fill="var(--wheel-color, #888)" aria-hidden="true" />
+      <g id="wheel-segments" aria-hidden="true"></g>
+    </svg>
+    <ul id="options" aria-labelledby="options-label"></ul>
+    <div id="wheel-decoration" aria-hidden="true"></div>
+  </div>
+  <div id="pointer" aria-hidden="true">◀︎</div>
+</figure>
+
+<form id="wheel-controls">
+  <fieldset>
+    <legend class="sr-only">Wheel controls</legend>
+
+    <button id="edit-items-button" type="button" title="Edit" popovertarget="items-input" disabled aria-label="Edit items">
+      📝
+    </button>
+    <button id="spin" type="button" title="Spin ()" disabled>
+      🌀
+    </button>
+    <button id="remove" type="button" title="Remove current" disabled aria-label="Remove selected item">
+      🗑️
+    </button>
+  </fieldset>
+
+  <div id="items">
+    <label id="items-label" for="items-input" class="sr-only">Wheel items</label>
+    <p id="items-help" class="sr-only">Type one item per line.</p>
+    <textarea
+      id="items-input"
+      popover="auto"
+      autofocus
+      disabled
+      aria-labelledby="items-label"
+      aria-describedby="items-help"
+    ></textarea>
+  </div>
+</form>
