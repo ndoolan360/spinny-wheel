@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 #history,
 #wheel-display,
 #wheel-controls {
@@ -43,7 +47,7 @@ button:disabled {
 }
 
 #history {
-  position: fixed;
+  position: absolute;
   top: 1rem;
   right: 1rem;
   width: min(10rem, 50vw);
@@ -141,9 +145,13 @@ button:disabled {
 #wheel-container {
   position: relative;
   padding: 1rem;
-  display: flex;
+  display: grid;
+  place-items: center;
   flex: 1 1;
   margin: auto;
+  aspect-ratio: 1 / 1;
+  max-width: 100%;
+  align-self: center;
 }
 
 #pointer {
@@ -162,7 +170,7 @@ button:disabled {
   place-items: center;
   transition: transform var(--transition-duration, 5s) cubic-bezier(0, 0.2, 0, 1);
   transform: rotate(calc(var(--revs, 0) * 360deg + var(--angle, 0) * 1deg));
-  margin: 0 auto;
+  width: 100%;
 }
 
 @media (prefers-reduced-motion: reduce) {
