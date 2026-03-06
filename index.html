@@ -11,22 +11,24 @@
   <ul id="history-list" role="log" aria-live="polite" aria-relevant="additions"></ul>
 </details>
 
-<figure id="wheel-container">
+<figure id="wheel-display">
   <figcaption id="result">
     <p id="result-label">Result</p>
     <output id="display" aria-live="polite" aria-atomic="true" aria-labelledby="result-label" role="status"></output>
   </figcaption>
 
-  <p id="options-label" class="sr-only">Wheel items</p>
-  <div id="wheel" role="group">
-    <svg aria-hidden="true" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="50" cy="50" r="50" fill="var(--wheel-color, #888)" aria-hidden="true" />
-      <g id="wheel-segments" aria-hidden="true"></g>
-    </svg>
-    <ul id="options" aria-labelledby="options-label"></ul>
-    <div id="wheel-decoration" aria-hidden="true"></div>
+  <div id="wheel-container" role="group">
+    <p id="options-label" class="sr-only">Wheel items</p>
+    <div id="wheel" role="group">
+      <svg aria-hidden="true" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="50" fill="var(--wheel-color, #888)" aria-hidden="true" />
+        <g id="wheel-segments" aria-hidden="true"></g>
+      </svg>
+      <ul id="options" aria-labelledby="options-label"></ul>
+      <div id="wheel-decoration" aria-hidden="true"></div>
+    </div>
+    <div id="pointer" aria-hidden="true">◀︎</div>
   </div>
-  <div id="pointer" aria-hidden="true">◀︎</div>
 </figure>
 
 <form id="wheel-controls">

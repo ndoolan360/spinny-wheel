@@ -1,13 +1,32 @@
 #history,
-#wheel-container,
+#wheel-display,
 #wheel-controls {
   font-family: Open Sans, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-size: 1rem;
 }
 
+:has(>*>#wheel-display) {
+  display: flex;
+  max-height: 100vh;
+}
+
+:has(>#wheel-display) {
+  background-color: var(--background, #333);
+  color: var(--foreground, #DDD);
+
+  width: 100%;
+  flex: 1 1;
+
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
 button {
   min-height: 1.5rem;
   min-width: 1.5rem;
+  height: auto;
   border-radius: 1.5rem;
   font-size: 16px;
   text-align: center;
@@ -21,24 +40,6 @@ button {
 button:disabled {
   opacity: 0.3;
   cursor: not-allowed;
-}
-
-:has(>*>#wheel-container) {
-  display: flex;
-}
-
-:has(>#wheel-container) {
-  background-color: var(--background, #333);
-  color: var(--foreground, #DDD);
-
-  width: 100%;
-  flex-grow: 1;
-
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
-  justify-content: space-between;
-  margin: 1rem 0;
 }
 
 #history {
@@ -96,10 +97,13 @@ button:disabled {
   padding: 0.15rem 0.5rem;
 }
 
-#wheel-container {
-  position: relative;
-  margin: auto;
-  width: min(80vw, 80vh);
+#wheel-display {
+  display: flex;
+  flex-flow: column nowrap;
+  flex: 1 1;
+  margin: 0;
+  padding: 0;
+  width: 100%;
   overflow: hidden;
 }
 
@@ -108,13 +112,13 @@ button:disabled {
   min-width: 8rem;
   width: fit-content;
   max-width: 80%;
-  margin: 1rem auto;
+  margin: .5rem auto 0 auto;
   padding: 0.25rem 0.75rem;
   border: 1px solid var(--foreground, #DDD);
   border-radius: 0.75rem;
 }
 
-#wheel-container #result #result-label {
+#wheel-display #result #result-label {
   position: absolute;
   top: -1.75rem;
   left: .75rem;
@@ -123,7 +127,7 @@ button:disabled {
   padding: 0 0.25rem;
 }
 
-#wheel-container #result #display {
+#wheel-display #result #display {
   display: inline-block;
   width: 100%;
   height: 4rem;
@@ -134,35 +138,23 @@ button:disabled {
   white-space: nowrap;
 }
 
+#wheel-container {
+  position: relative;
+  padding: 1rem;
+  display: flex;
+  flex: 1 1;
+  margin: auto;
+}
+
 #pointer {
   position: absolute;
-  bottom: min(40vh, 40vw);
+  top: 50%;
   right: 0;
-  transform: translateY(50%);
+  transform: translateY(-50%);
   font-size: 2rem;
   user-select: none;
   pointer-events: none;
   text-shadow: 0 0 5px var(--background, #333);
-}
-
-#wheel-decoration {
-  position: absolute;
-}
-
-#wheel-decoration::before {
-  position: absolute;
-  content: "";
-  top: 50%;
-  left: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.5rem;
-  transform: translate(-50%, -50%);
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 50%;
-  background: var(--wheel-decoration, var(--background, #333));
 }
 
 #wheel {
@@ -170,8 +162,7 @@ button:disabled {
   place-items: center;
   transition: transform var(--transition-duration, 5s) cubic-bezier(0, 0.2, 0, 1);
   transform: rotate(calc(var(--revs, 0) * 360deg + var(--angle, 0) * 1deg));
-  width: 100%;
-  aspect-ratio: 1;
+  margin: 0 auto;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -180,11 +171,30 @@ button:disabled {
   }
 }
 
+#wheel-decoration {
+  position: relative;
+  grid-area: 1 / 1;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: var(--wheel-decoration, var(--background, #333));
+}
+
+#wheel-decoration::before {
+  content: "";
+  font-size: 1.5rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 #wheel>svg {
   grid-area: 1 / 1;
-  width: calc(100% - 2rem);
-  height: calc(100% - 2rem);
-  overflow: unset;
+  min-width: 0;
+  min-height: 0;
+  width: 100%;
+  height: 100%;
 }
 
 #wheel-segments path,
@@ -196,12 +206,8 @@ button:disabled {
 #options {
   position: relative;
   grid-area: 1 / 1;
-  width: calc(100% - 2rem);
-  height: calc(100% - 2rem);
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
+  aspect-ratio: 1;
   color: var(--background, #333);
   list-style: none;
   margin: 0;
@@ -214,6 +220,7 @@ button:disabled {
   top: 50%;
   right: 0;
   left: 50%;
+  margin: 0;
   padding: 0 1rem 0 1.5rem;
   transform-origin: center left;
   transform: translateY(-50%) rotate(calc(var(--angle, 0) * 1deg));
@@ -226,6 +233,7 @@ button:disabled {
 
 #wheel-controls {
   anchor-name: --control-anchor;
+  display: block;
   margin: 0;
 }
 
